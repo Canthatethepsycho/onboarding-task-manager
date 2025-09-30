@@ -1,0 +1,29 @@
+{
+  "name": "onboarding-task-manager-backend",
+  "version": "1.0.0",
+  "description": "Backend des webbasierten Aufgabenmanagement-Tools für das Azubi-Onboarding (IHK-Abschlussprojekt).",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "node src/index.js",
+    "dev": "nodemon src/index.js",
+    "test": "jest"
+  },
+  "author": "Viktor Lamasz",
+  "license": "MIT",
+  "dependencies": {
+    "bcrypt": "^5.1.0",
+    "cors": "^2.8.5",
+    "dotenv": "^16.3.1",
+    "express": "^4.18.2",
+    "express-session": "^1.17.3",
+    "pg": "^8.11.1",
+    "sequelize": "^6.32.1"
+  },
+  "devDependencies": {
+    "jest": "^29.7.0",
+    "nodemon": "^3.0.1",
+    "supertest": "^6.3.3"
+  },
+  "type": "module"
+}
+            

@@ -41,6 +41,7 @@ Abschlussprojekt im Rahmen der Ausbildung zum **Fachinformatiker für Anwendungs
 Viktor Lamasz 
 Projekt im Rahmen der Abschlussarbeit in der Ausbildung zum Fachinformatiker für Anwendungsentwicklung.
 Für Rückfragen: viktor.lamasz@icloud.com
+Projektbetreuer: Dirk Mohles (HTV GmbH)
 
 
 ## 📜 Lizenz

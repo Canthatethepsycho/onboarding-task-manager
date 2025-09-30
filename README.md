@@ -18,3 +18,7 @@ Mit dem Onboarding Task Manager kannst du als Ausbilder Aufgaben erstellen, Ausz
 
 ## 📂 Projektstruktur
 
+## 📜 Lizenz
+
+Dieses Projekt ist lizenziert unter der MIT-Lizenz. Siehe LICENSE
+ für Details.

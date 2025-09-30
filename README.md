@@ -2,21 +2,46 @@
 
 Ein webbasiertes Tool zur Verwaltung von Aufgaben im Azubi-Onboarding.
 
+## 🚀 Installation & Setup
+1. Repository klonen:
+   ```bash
+   git clone https://github.com/Canthatethepsycho/onboarding-task-manager.git
+   cd onboarding-task-manager
+
+
+
 ## 🚀 Projektbeschreibung
 
-Mit dem Onboarding Task Manager kannst du als Ausbilder Aufgaben erstellen, Auszubildenden zuweisen und den Fortschritt kontrollieren. Ziel ist es, den Onboarding-Prozess transparenter und strukturierter zu gestalten.
+Ein webbasiertes Aufgabenmanagement-Tool zur zentralen Erfassung, Zuweisung und Nachverfolgung von Tätigkeiten beim Onboarding neuer Auszubildender.  
+Abschlussprojekt im Rahmen der Ausbildung zum **Fachinformatiker für Anwendungsentwicklung (Winterprüfung 2025)**.
+
 
 ## 🧰 Tech-Stack
 
 | Bereich      | Technologie / Tool         |
 |---------------|-----------------------------|
-| Frontend      | React, CSS / Tailwind o. Ä. |
-| Backend       | Node.js, Express             |
-| Datenbank     | PostgreSQL                   |
-| Authentifizierung | JWT / Sessions             |
-| Testframeworks| Jest, React Testing Library  |
+| Frontend      |  React.js (Single-Page-Application, responsive Design)   |
+| Backend       | Node.js mit Express Framework        |
+| Datenbank     | PostgreSQL (relationale Datenstrukturen)                 |
+| Authentifizierung |Einfaches Login-System mit Session-Management         |
+| Testframeworks|Jest, React Testing Library, Integrationstests    |
 
-## 📂 Projektstruktur
+
+## ✨ Kernkomponenten
+
+1. **Benutzeroberfläche (GUI):** React-basiertes Dashboard und Aufgabenverwaltung  
+2. **Aufgabenmanagement:** CRUD-Operationen für Aufgaben, inkl. Statusverfolgung  
+3. **Rollensystem:** Unterscheidung von Azubi, Ausbilder, Admin  
+4. **Nachverfolgung:** Transparente Übersicht über den Onboarding-Fortschritt  
+
+
+
+## 👤 Autor & Kontakt
+
+Viktor Lamasz 
+Projekt im Rahmen der Abschlussarbeit in der Ausbildung zum Fachinformatiker für Anwendungsentwicklung.
+Für Rückfragen: viktor.lamasz@icloud.com
+
 
 ## 📜 Lizenz
 

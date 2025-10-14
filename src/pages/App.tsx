@@ -1,7 +1,54 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Route, Routes, Link  } from "react-router-dom";
+
 import Login from './login';  
+
+import Users from './Users';
+
+import Navbar from "../components/Navbar";
+
+
+
+import Home from ".//Home";
+
+
+
+
+function App() {
+  return (
+
+
+    <BrowserRouter>
+
+      <nav style={{ padding: "10px", background: "#eee" }}>
+        {/* Navigation */}
+        <Link to="/" style={{ marginRight: "10px" }}>🏠 Home</Link>
+        <Link to="/login" style={{ marginRight: "10px" }}>🔑 Login</Link>
+        <Link to="/users">👤 Users</Link>
+      </nav>
+
+      <Routes>
+        <Route path="/" element={<Home />} />
+
+        <Route path="/login" element={<Login />} />
+
+        <Route path="/Users" element={<Users />} />
+
+      </Routes>
+    </BrowserRouter>
+    
+
+  );
+
+};
+
+
+
+
+
+
 <Route path="/login" element={<Login />} />
 import '../App.css'
+
 
 
 
@@ -24,7 +71,7 @@ type User = {
 
 // --- IGNORE ---
 
-function Users() {
+function loadUser() {
   const [users, setUsers] = useState<User[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);

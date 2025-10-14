@@ -1,0 +1,70 @@
+.onboard-root {
+  font-family: Arial, sans-serif;
+  background-color: #f4f6f8;
+  min-height: 100vh;
+  color: #333;
+}
+
+.onboard-header {
+  background-color: #0077cc;
+  color: white;
+  padding: 20px;
+  text-align: center;
+}
+
+.onboard-main {
+  max-width: 960px;
+  margin: 30px auto;
+  padding: 0 20px 60px;
+}
+
+.onboard-section {
+  background-color: white;
+  border-radius: 10px;
+  padding: 20px;
+  margin-bottom: 20px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
+}
+
+.task-list {
+  list-style: none;
+  padding-left: 0;
+}
+
+.task-list li {
+  background-color: #eaf0f6;
+  margin-bottom: 10px;
+  padding: 10px 15px;
+  border-radius: 5px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.task-controls {
+  display: flex;
+  gap: 8px;
+  margin-top: 12px;
+}
+
+.task-controls input {
+  flex: 1;
+  padding: 8px 10px;
+  border-radius: 6px;
+  border: 1px solid #ddd;
+}
+
+.task-controls button {
+  background-color: #0077cc;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  padding: 8px 12px;
+  cursor: pointer;
+}
+
+.onboard-footer {
+  text-align: center;
+  padding: 20px;
+  color: #666;
+}

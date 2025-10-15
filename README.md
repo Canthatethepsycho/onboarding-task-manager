@@ -35,15 +35,6 @@ Abschlussprojekt im Rahmen der Ausbildung zum **Fachinformatiker für Anwendungs
 4. **Nachverfolgung:** Transparente Übersicht über den Onboarding-Fortschritt  
 
 
-
-## 👤 Autor & Kontakt
-
-Viktor Lamasz 
-Projekt im Rahmen der Abschlussarbeit in der Ausbildung zum Fachinformatiker für Anwendungsentwicklung.
-Für Rückfragen: viktor.lamasz@icloud.com
-Projektbetreuer: Dirk Mohles (HTV GmbH)
-
-
 ## 📜 Lizenz
 
 Dieses Projekt ist lizenziert unter der MIT-Lizenz. Siehe LICENSE

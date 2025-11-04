@@ -1,3 +1,4 @@
+/* ===== Root & Basis ===== */
 :root {
   font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
@@ -5,36 +6,39 @@
 
   color-scheme: light dark;
   color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
+  background-color: #121212;
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+
+  --primary-color: #646cff;
+  --primary-hover: #535bf2;
+  --card-bg: rgba(255, 255, 255, 0.05);
+  --input-bg: rgba(255, 255, 255, 0.1);
+  --input-border: rgba(255, 255, 255, 0.2);
 }
 
+/* ===== Links ===== */
 a {
   font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
+  color: var(--primary-color);
+  text-decoration: none;
+  transition: color 0.25s;
 }
 a:hover {
-  color: #535bf2;
+  color: var(--primary-hover);
 }
 
-body {
-  margin: 0;
-  display: flex;
-  place-items: center;
-  min-width: 320px;
-  min-height: 100vh;
+/* ===== Überschriften ===== */
+h1, h2, h3, h4 {
+  font-weight: 700;
+  color: #fff;
+  margin: 0 0 1rem 0;
 }
 
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
-}
-
+/* ===== Buttons ===== */
 button {
   border-radius: 8px;
   border: 1px solid transparent;
@@ -42,27 +46,65 @@ button {
   font-size: 1em;
   font-weight: 500;
   font-family: inherit;
-  background-color: #1a1a1a;
+  background-color: var(--primary-color);
+  color: #fff;
   cursor: pointer;
-  transition: border-color 0.25s;
+  transition: background-color 0.25s, transform 0.2s, box-shadow 0.2s;
 }
 button:hover {
-  border-color: #646cff;
+  background-color: var(--primary-hover);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
 }
 button:focus,
 button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
+  outline: 2px solid var(--primary-color);
+  outline-offset: 2px;
 }
 
+/* ===== Inputs ===== */
+input, select, textarea {
+  width: 100%;
+  padding: 0.8em;
+  margin-bottom: 1rem;
+  background-color: var(--input-bg);
+  border: 1px solid var(--input-border);
+  border-radius: 8px;
+  color: #fff;
+  font-size: 1em;
+  font-family: inherit;
+  transition: border-color 0.2s, background-color 0.2s;
+}
+input:focus, textarea:focus, select:focus {
+  border-color: var(--primary-color);
+  outline: none;
+  background-color: rgba(255,255,255,0.15);
+}
+
+/* ===== Cards / Container ===== */
+.card, .auth-container {
+  background-color: var(--card-bg);
+  padding: 2rem;
+  border-radius: 16px;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+  width: 100%;
+  max-width: 400px;
+  margin: auto;
+}
+
+/* ===== Responsive ===== */
 @media (prefers-color-scheme: light) {
   :root {
     color: #213547;
-    background-color: #ffffff;
+    background-color: #f9f9f9;
+    --card-bg: rgba(255,255,255,0.95);
+    --input-bg: #fff;
+    --input-border: #ccc;
+  }
+  button {
+    color: #fff;
   }
   a:hover {
     color: #747bff;
-  }
-  button {
-    background-color: #f9f9f9;
   }
 }

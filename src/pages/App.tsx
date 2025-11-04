@@ -1,63 +1,36 @@
-import { BrowserRouter, Route, Routes, Link  } from "react-router-dom";
 
+  // imports ----------------------------------------------------------------------------------------------------------|
+
+import { BrowserRouter, Route, Routes, Link } from "react-router-dom";
 import Login from './login';  
-
 import Users from './Users';
+import Home from "./Home";
+import Register from "./Register";
+import ForgotPassword from './ForgotPassword';
+import "../App.css";
+import MainLayout from "../components/MainLayout";
 
-import Navbar from "../components/Navbar";
+import { useEffect, useState } from "react";
 
 
 
-import Home from ".//Home";
+// function APP ----------------------------------------------------------------------------------------------------------|
 
 
-
-
-function App() {
+export default function App() {
   return (
-
-
-    <BrowserRouter>
-
-      <nav style={{ padding: "10px", background: "#eee" }}>
-        {/* Navigation */}
-        <Link to="/" style={{ marginRight: "10px" }}>🏠 Home</Link>
-        <Link to="/login" style={{ marginRight: "10px" }}>🔑 Login</Link>
-        <Link to="/users">👤 Users</Link>
-      </nav>
-
-      <Routes>
-        <Route path="/" element={<Home />} />
-
-        <Route path="/login" element={<Login />} />
-
-        <Route path="/Users" element={<Users />} />
-
-      </Routes>
-    </BrowserRouter>
-    
-
+    <Routes>
+      {/* Fullscreen Login */}
+      <Route path="/login" element={<Login />} />
+      <Route path="/forgot-password" element={<ForgotPassword />} />
+      <Route path="/register" element={<Register/>} />
+      {/* Layout-Seiten */}
+      <Route path="/" element={<MainLayout><Home /></MainLayout>} />
+      <Route path="/users" element={<MainLayout><Users /></MainLayout>} />
+      <Route path="/register" element={<MainLayout><Register /></MainLayout>} />
+    </Routes>
   );
-
-};
-
-
-
-
-
-
-<Route path="/login" element={<Login />} />
-import '../App.css'
-
-
-
-
-<Route path="/login" element={<Login />} />
-
-
-
-import { useEffect, useState } from 'react'
-
+}
 
 
 // Define User type for TypeScript
@@ -109,5 +82,3 @@ function loadUser() {
     </div>
   );
 }
-
-export default Users;

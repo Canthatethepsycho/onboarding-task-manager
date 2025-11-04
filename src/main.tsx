@@ -5,6 +5,7 @@ import { BrowserRouter } from 'react-router-dom'
 import './index.css'
 import App from './pages/App.tsx'
 
+
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
     {/* Router umschließt deine gesamte App */}

@@ -1,25 +1,34 @@
-/* App.css */
+/* ===== Basis-Styling ===== */
+* {
+  box-sizing: border-box;
+}
 
-/* Basis-Styling */
 body {
   margin: 0;
   padding: 0;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background-color: #f4f6f8;
-  color: #333;
+  min-height: 100vh; /* volle Höhe */
+  display: flex;
+  flex-direction: column;
 }
 
-/* Gesamtcontainer */
+
+
+/* ===== App Container ===== */
 .app {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
-  max-width: 960px;
+  width: 95%;         /* fast volle Breite */
+  max-width: 1400px;  /* auf sehr großen Bildschirmen begrenzt */
   margin: 0 auto;
-  padding: 20px;
+  padding: 40px 20px;
+  box-sizing: border-box;
 }
 
-/* Navigation */
+
+
+/* ===== Navbar ===== */
 .navbar {
   display: flex;
   gap: 20px;
@@ -27,6 +36,7 @@ body {
   padding: 12px 24px;
   border-radius: 10px;
   margin-bottom: 20px;
+  flex-wrap: wrap;
 }
 
 .navbar a {
@@ -40,17 +50,19 @@ body {
   text-decoration: underline;
 }
 
-/* Hauptinhalt */
+/* ===== Hauptinhalt ===== */
 .content {
-  flex: 1;
+  flex: 1; /* nimmt den verbleibenden Platz */
 }
 
-/* Box für Seiteninhalte */
+/* Boxen für Seiteninhalte */
 .home, .users {
+
   background-color: white;
-  padding: 30px;
+  padding: 40px;             /* luftiger Inhalt */
   border-radius: 12px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  margin-bottom: 20px;
 }
 
 /* Überschriften */
@@ -69,4 +81,88 @@ ul {
 li {
   margin-bottom: 8px;
 }
-  
+
+/* ===================================================================================== Footer ===== */
+.footer {
+  background-color: #1e90ff;
+  color: white;
+  text-align: center;
+  padding: 12px 20px;
+  border-radius: 10px;
+  margin-top: 20px;
+}
+
+/* ===================================================================================== Responsive ===== */
+@media (max-width: 600px) {
+  .navbar {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .content {
+    padding: 10px;
+  }
+
+  .home, .users {
+    padding: 15px;
+  }
+}
+
+
+/* ----------------------------------------------------------------------------  dot grid background Hintergrund */
+.dot-grid-bg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  opacity: 0.3; /* leicht transparent */
+  background-color: #5227ff; /* optional */
+}
+
+
+
+
+.dot-grid-canvas {
+  background-color: #271e37; /* oder transparent */
+}
+
+/* ----------------------------------------------------------------------- Login und Register Seite Container */
+
+.auth-page {
+  position: relative;
+  width: 100%;
+  height: 100vh;       /* volle Höhe des Viewports */
+  display: flex;       /* Flexbox für Zentrierung */
+  justify-content: center;  /* horizontal zentrieren */
+  align-items: center;      /* vertikal zentrieren */
+  background-color: #f0f2f5; /* optionaler Hintergrund */
+}
+
+.auth-container {
+  position: relative;
+  z-index: 1;
+  background: rgba(255, 255, 255, 0.603);
+  padding: 3rem;
+  border-radius: 16px;
+  box-shadow: 0 12px 24px rgba(0,0,0,0.2);
+  width: 400px;
+  text-align: center;
+}
+
+.auth-container h2 {
+  margin-bottom: 1.5rem;
+  color: #000000;
+}
+
+.auth-container input {
+  width: 100%;
+  padding: 0.8rem;
+  margin-bottom: 1rem;
+  border: 1px solid #000000;
+  border-radius: 8px;
+}
+
+input {
+  color:#000000
+}

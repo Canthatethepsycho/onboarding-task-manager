@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import DotGridBackground from '../components/DotGridBackground';
 import "../auth.css"
+import { useNavigate } from 'react-router-dom';
 
 export default function Register() {
   const [first_Name, setFirstName] = useState('');
@@ -9,27 +10,52 @@ export default function Register() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [role, setRole] = useState('user');
+  const navigate = useNavigate();
 
-const handleSubmit = (e: React.FormEvent) => {
+
+const handleSubmit = async (e: React.FormEvent) => {
   e.preventDefault();
-  console.log({ first_Name, last_Name, email, password, role });
 
+  try {
+    // 1️⃣ Registrierung
+    console.log('Registriere Benutzer mit:', { first_Name, last_Name, email, password, role });
+    
+    const registerRes = await fetch('http://localhost:3000/api/register', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        first_name: first_Name,
+        last_name: last_Name,
+        email,
+        password,
+        role
+      }),
+    });
 
-      fetch('http://localhost:3000/api/register', {
-          
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ first_name: first_Name, last_name: last_Name, email, password, role }),
-      })  
-        .then((res) => {
-          if (!res.ok) throw new Error('Fehler bei der Registrierung');
-          return res.json();
-        }
-        )
-        .then((data) => {
-          console.log('Erfolgreich registriert:', data);
-          // Nach erfolgreicher Registrierung weiterleiten oder Erfolgsmeldung anzeigen
-        });
+    if (!registerRes.ok) throw new Error('Fehler bei der Registrierung');
+
+    const registerData = await registerRes.json();
+    console.log('Erfolgreich registriert:', registerData);
+
+    // 2️⃣ Direkt einloggen
+    const loginRes = await fetch('http://localhost:3000/api/login', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ email, password }),
+    });
+
+    if (!loginRes.ok) throw new Error('Login fehlgeschlagen');
+
+    const loginData = await loginRes.json();
+    console.log('Erfolgreich eingeloggt:', loginData);
+
+    // 3️⃣ Weiterleitung auf Onboarding-Seite
+    navigate('/'); // "/" ist hier deine Onboarding-Seite
+
+  } catch (error) {
+    console.error(error);
+    alert((error as Error).message);
+  }
 };
 
 
@@ -47,6 +73,8 @@ const handleSubmit = (e: React.FormEvent) => {
           <input type="password" placeholder="Passwort" value={password} onChange={e => setPassword(e.target.value)} required />
           <button type="submit">Registrieren</button>
         </form>
+     
+
 
         <div className="auth-footer">
           Schon registriert? <Link to="/login">Einloggen</Link>

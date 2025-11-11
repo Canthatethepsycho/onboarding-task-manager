@@ -15,7 +15,9 @@ dist/
 build/
 .tmp/
 .cache/
-
+%USERPROFILE%/
+%USERPROFILE%/npm-cache/
+%USERPROFILE%/npm-cache/_cacache/
 # ============================
 # Environment files
 # ============================

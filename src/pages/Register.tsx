@@ -1,80 +1,176 @@
-import { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import DotGridBackground from '../components/DotGridBackground';
+import { ToastContainer, useToast } from '../components/Toast';
+import {
+  apiCall,
+  saveToken,
+  validateEmail,
+  validatePassword,
+  validateName,
+} from '../utils/authUtils';
 import "../auth.css"
-import { useNavigate } from 'react-router-dom';
 
 export default function Register() {
   const [first_Name, setFirstName] = useState('');
   const [last_Name, setLastName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [role, setRole] = useState('user');
+  const [confirmPassword, setConfirmPassword] = useState('');
+  const [loading, setLoading] = useState(false);
+  const [passwordStrength, setPasswordStrength] = useState<{
+    valid: boolean;
+    errors: string[];
+  } | null>(null);
+
   const navigate = useNavigate();
+  const { toasts, addToast, removeToast } = useToast();
 
+  // Validiere Passwort in Echtzeit
+  const handlePasswordChange = (value: string) => {
+    setPassword(value);
+    if (value) {
+      setPasswordStrength(validatePassword(value));
+    } else {
+      setPasswordStrength(null);
+    }
+  };
 
-const handleSubmit = async (e: React.FormEvent) => {
-  e.preventDefault();
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setLoading(true);
 
-  try {
-    // 1️⃣ Registrierung
-    console.log('Registriere Benutzer mit:', { first_Name, last_Name, email, password, role });
-    
-    const registerRes = await fetch('http://localhost:3000/api/register', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        first_name: first_Name,
-        last_name: last_Name,
-        email,
-        password,
-        role
-      }),
-    });
+    try {
+      // ✅ Validierung: Namen
+      const firstNameError = validateName(first_Name, 'Vorname');
+      if (firstNameError) {
+        addToast(firstNameError, 'error');
+        setLoading(false);
+        return;
+      }
 
-    if (!registerRes.ok) throw new Error('Fehler bei der Registrierung');
+      const lastNameError = validateName(last_Name, 'Nachname');
+      if (lastNameError) {
+        addToast(lastNameError, 'error');
+        setLoading(false);
+        return;
+      }
 
-    const registerData = await registerRes.json();
-    console.log('Erfolgreich registriert:', registerData);
+      // ✅ Validierung: Email
+      if (!validateEmail(email)) {
+        addToast('Bitte geben Sie eine gültige E-Mail Adresse ein', 'error');
+        setLoading(false);
+        return;
+      }
 
-    // 2️⃣ Direkt einloggen
-    const loginRes = await fetch('http://localhost:3000/api/login', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ email, password }),
-    });
+      // ✅ Validierung: Passwort
+      const passwordValidation = validatePassword(password);
+      if (!passwordValidation.valid) {
+        addToast(passwordValidation.errors.join('. '), 'error');
+        setLoading(false);
+        return;
+      }
 
-    if (!loginRes.ok) throw new Error('Login fehlgeschlagen');
+      // ✅ Validierung: Passwort Bestätigung
+      if (password !== confirmPassword) {
+        addToast('Passwörter stimmen nicht überein', 'error');
+        setLoading(false);
+        return;
+      }
 
-    const loginData = await loginRes.json();
-    console.log('Erfolgreich eingeloggt:', loginData);
+      // Registrierung
+      const registerData = await apiCall('/api/register', {
+        method: 'POST',
+        body: JSON.stringify({
+          first_name: first_Name,
+          last_name: last_Name,
+          email,
+          password,
+          role: 'user',
+        }),
+      });
 
-    // 3️⃣ Weiterleitung auf Onboarding-Seite
-    navigate('/'); // "/" ist hier deine Onboarding-Seite
+      if (registerData.error) {
+        addToast(registerData.error, 'error');
+        setLoading(false);
+        return;
+      }
 
-  } catch (error) {
-    console.error(error);
-    alert((error as Error).message);
-  }
-};
+      // ✅ Token speichern
+      if (registerData.token) {
+        saveToken(registerData.token);
+      }
 
-
-  
+      addToast('Registrierung erfolgreich!', 'success');
+      setTimeout(() => navigate('/'), 1500);
+    } catch (error) {
+      addToast((error as Error).message || 'Ein Fehler ist aufgetreten', 'error');
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
     <div className="auth-page">
       <DotGridBackground />
+      <ToastContainer toasts={toasts} onRemove={removeToast} />
+      
       <div className="auth-container">
         <h2>📝 Registrieren</h2>
         <form onSubmit={handleSubmit} className="auth-form">
-          <input type="text" placeholder="Vorname" value={first_Name} onChange={e => setFirstName(e.target.value)} required />
-          <input type="text" placeholder="Nachname" value={last_Name} onChange={e => setLastName(e.target.value)} required />
-          <input type="email" placeholder="E-Mail" value={email} onChange={e => setEmail(e.target.value)} required />
-          <input type="password" placeholder="Passwort" value={password} onChange={e => setPassword(e.target.value)} required />
-          <button type="submit">Registrieren</button>
-        </form>
-     
+          <input
+            type="text"
+            placeholder="Vorname"
+            value={first_Name}
+            onChange={e => setFirstName(e.target.value)}
+            required
+          />
+          <input
+            type="text"
+            placeholder="Nachname"
+            value={last_Name}
+            onChange={e => setLastName(e.target.value)}
+            required
+          />
+          <input
+            type="email"
+            placeholder="E-Mail"
+            value={email}
+            onChange={e => setEmail(e.target.value)}
+            required
+          />
+          <input
+            type="password"
+            placeholder="Passwort"
+            value={password}
+            onChange={e => handlePasswordChange(e.target.value)}
+            required
+          />
+          
+          {/* ✅ Passwort Stärke Anzeige */}
+          {passwordStrength && !passwordStrength.valid && (
+            <div style={{ fontSize: '12px', color: '#ef4444', marginBottom: '10px' }}>
+              <p>Passwortanforderungen:</p>
+              <ul style={{ marginLeft: '20px' }}>
+                {passwordStrength.errors.map((err, idx) => (
+                  <li key={idx}>{err}</li>
+                ))}
+              </ul>
+            </div>
+          )}
 
+          <input
+            type="password"
+            placeholder="Passwort bestätigen"
+            value={confirmPassword}
+            onChange={e => setConfirmPassword(e.target.value)}
+            required
+          />
+          
+          <button type="submit" disabled={loading}>
+            {loading ? 'Wird registriert...' : 'Registrieren'}
+          </button>
+        </form>
 
         <div className="auth-footer">
           Schon registriert? <Link to="/login">Einloggen</Link>

@@ -18,6 +18,7 @@ build/
 %USERPROFILE%/
 %USERPROFILE%/npm-cache/
 %USERPROFILE%/npm-cache/_cacache/
+%USERPROFILE%/npm-cache/
 # ============================
 # Environment files
 # ============================

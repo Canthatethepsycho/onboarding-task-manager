@@ -12,6 +12,10 @@ const app = express();
 const port = process.env.PORT || 3000;
 const frontendUrl = process.env.FRONTEND_URL || "http://localhost:5173";
 
+// Debug: Zeige CORS-Einstellungen
+console.log(`🔧 CORS Origin: ${frontendUrl}`);
+console.log(`📡 Backend läuft auf Port: ${port}`);
+
 // CORS mit Umgebungsvariablen
 app.use(
   cors({
